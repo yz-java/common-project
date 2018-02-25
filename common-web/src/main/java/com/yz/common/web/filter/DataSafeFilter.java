@@ -16,7 +16,7 @@ import java.util.Set;
 
 /**
  * @author yangzhao
- * @Description
+ * @Description 请求参数转换；数据保存Parameter中
  * @Date create by 14:45 18/2/17
  */
 public class DataSafeFilter extends BaseFilter {
@@ -33,8 +33,7 @@ public class DataSafeFilter extends BaseFilter {
         boolean processor = true;
         HttpServletRequest httpServletRequest = (HttpServletRequest)request;
         String url = httpServletRequest.getRequestURL().toString();
-        Map<String, String[]> parameterMap = request.getParameterMap();
-        IHttpServletRequestWrapper iHttpServletRequestWrapper = new IHttpServletRequestWrapper((HttpServletRequest) request,parameterMap);
+        IHttpServletRequestWrapper iHttpServletRequestWrapper = new IHttpServletRequestWrapper((HttpServletRequest) request,null);
         //解析请求数据
         try {
             byte[] data = HttpUtil.getRequestByteArray(httpServletRequest);

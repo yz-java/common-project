@@ -52,14 +52,14 @@ JSON类(JsonUtil)
     
 ## 6.common-web
 
-①自定义web拦截器（DataSafeFilter）
+①请求参数转换（非Form表单或get+参数方式）：
 
-    加密json数据解析为Map保存到HttpServletRequest中；自定义HttpServletRequest包装类
-    
-    （IHttpServletRequestWrapper），将解析的Map数据以请求参数方式保存到Parameter中
+    自定义web拦截器（DataSafeFilter），加密json数据解析为Map保存到HttpServletRequest
+    中；自定义HttpServletRequest包装类（IHttpServletRequestWrapper），将解析的Map数        
+    据保存到Parameter中
 
 
-②基于springmvc restful接口参数验证，返回前端友好提示。
+②基于hibernate-validator restful接口参数验证
 
 QQ:208275451
 邮箱：yangzhao_java@163.com

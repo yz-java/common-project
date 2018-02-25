@@ -40,6 +40,9 @@ public class IHttpServletRequestWrapper extends HttpServletRequestWrapper {
     }
 
     public void addAllParameters(Map<String , String[]>otherParams) {//增加多个参数
+        if (otherParams==null){
+            return;
+        }
         for(Map.Entry<String , String[]>entry : otherParams.entrySet()) {
             addParameter(entry.getKey() , entry.getValue());
         }
@@ -78,5 +81,9 @@ public class IHttpServletRequestWrapper extends HttpServletRequestWrapper {
         } else {
             return Collections.enumeration(params.keySet());
         }
+    }
+
+    public void emptyParameters(){
+        params.clear();
     }
 }

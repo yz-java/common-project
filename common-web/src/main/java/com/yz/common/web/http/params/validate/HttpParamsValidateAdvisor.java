@@ -1,23 +1,24 @@
 package com.yz.common.web.http.params.validate;
 
+import com.alibaba.fastjson.JSON;
+import com.yz.common.core.configuration.ValidatorConfiguration;
 import com.yz.common.core.exception.HandlerException;
 import com.yz.common.core.http.ResponseMessage;
-import com.yz.common.core.json.JSON;
 import com.yz.common.core.utils.ClassUtil;
 import com.yz.common.web.annotations.HttpParam;
 import com.yz.common.web.annotations.ParamsValidate;
 import org.aopalliance.intercept.MethodInterceptor;
 import org.aopalliance.intercept.MethodInvocation;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
+import javax.validation.ConstraintViolation;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Parameter;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -29,6 +30,8 @@ import java.util.stream.Collectors;
 @Component("httpParamsValidateAdvisor")
 public class HttpParamsValidateAdvisor implements MethodInterceptor {
 
+    private final Logger logger = LoggerFactory.getLogger(HttpParamsValidateAdvisor.class);
+
     @Override
     public Object invoke(MethodInvocation methodInvocation) throws Throwable {
         Method method = methodInvocation.getMethod();
@@ -37,10 +40,10 @@ public class HttpParamsValidateAdvisor implements MethodInterceptor {
         for (int i=0;i<parameters.length; i++) {
             ParamsValidate annotation = parameters[i].getAnnotation(ParamsValidate.class);
             if (annotation!=null){
-                try{
-                    validate(arguments[i]);
-                }catch (HandlerException e){
-                    return JSON.getInterface().toJsonString(new ResponseMessage(-1,e.getErrorInfo()));
+                Set<ConstraintViolation<Object>> violationSet = ValidatorConfiguration.validator().validate(arguments[i]);
+                for (ConstraintViolation model : violationSet) {
+                    logger.warn(model.getPropertyPath()+model.getMessage());
+                    return JSON.toJSONString(new ResponseMessage(-1,model.getPropertyPath()+model.getMessage()));
                 }
             }
         }
