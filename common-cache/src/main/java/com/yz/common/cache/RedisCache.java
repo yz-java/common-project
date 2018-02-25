@@ -133,7 +133,7 @@ public class RedisCache implements ICache {
 
 	@Override
 	public <T> void listRemove(String mname, T value) {
-		String jsonString = JSON.getJsonInterface().toJsonString(value);
+		String jsonString = JSON.getInterface().toJsonString(value);
 		RedisUtil.getInstance().delList(mname, 0,jsonString);
 	}
 
@@ -144,7 +144,7 @@ public class RedisCache implements ICache {
 
 	@Override
 	public void listAdd(String mname,Object t) {
-		String jsonString = JSON.getJsonInterface().toJsonString(t);
+		String jsonString = JSON.getInterface().toJsonString(t);
 		if(t!=null){
 			RedisUtil.getInstance().rpush(mname,jsonString);
 		}

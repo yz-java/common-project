@@ -223,7 +223,7 @@ public class RedisUtil {
 	public void lset(String mname, int index, Object obj) {
 		Jedis jedis = this.getJedis();
 		Transaction multi = jedis.multi();
-		multi.lset(mname, index, JSON.getJsonInterface().toJsonString(obj));
+		multi.lset(mname, index, JSON.getInterface().toJsonString(obj));
 		multi.exec();
 		jedis.close();
 	}

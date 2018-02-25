@@ -24,7 +24,7 @@ public final class JSON {
         }
     }
 
-    public static IJsonInterface getJsonInterface(){
+    public static IJsonInterface getInterface(){
         if (jsonInterface==null){
             throw new RuntimeException("jsonInterface接口==null,请预先实例化该工具类");
         }

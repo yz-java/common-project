@@ -6,6 +6,8 @@ import java.net.URI;
 import java.security.KeyStore;
 import java.util.*;
 import javax.net.ssl.SSLContext;
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -38,6 +40,36 @@ public class HttpUtil {
 
 	private final static String CHARSET_NAME = "UTF-8";
 
+
+	/**
+	 * request对象转字节
+	 * @param request
+	 * @return
+	 */
+	public static byte[] getRequestByteArray(HttpServletRequest request) {
+		byte[] dataOrigin=null;
+		InputStream is = null;
+		try {
+			int contentLength = request.getContentLength();
+			if (contentLength <= 0) {
+				return null;
+			}
+			dataOrigin= new byte[contentLength];
+			is = request.getInputStream();
+			is.read(dataOrigin);
+		} catch (Exception e) {
+			logger.error("request对象转字节失败！", e);
+		}finally {
+			try {
+				if (is!=null){
+					is.close();
+				}
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		return dataOrigin;
+	}
 
 	public static String getRequest(String url) {
 		try {

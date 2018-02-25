@@ -33,7 +33,7 @@ public class AliPay implements IPay {
 		Map biz_content = new HashMap();
 		biz_content.put("out_trade_no",aliRefundParams.getOutTradeNo());
 		biz_content.put("refund_amount",aliRefundParams.getRefundAmount());
-		params.put("biz_content", JSON.getJsonInterface().toJsonString(biz_content));
+		params.put("biz_content", JSON.getInterface().toJsonString(biz_content));
 		Map<String, String> paraFilter = AlipayUtil.paraFilter(params);
 		String createLinkString = AlipayUtil.createLinkString(paraFilter);
 		String sign= AlipayUtil.signRSA256(createLinkString, AlipayUtil.application_privateKey,"UTF-8");
@@ -47,9 +47,10 @@ public class AliPay implements IPay {
 			}
 		});
 		String resData = HttpUtil.getRequest(AlipayUtil.refund_url+payParams.toString());
-		if (StringUtils.isEmpty(resData))
+		if (StringUtils.isEmpty(resData)) {
 			return null;
-		HashMap parse = JSON.getJsonInterface().parseObject(resData,HashMap.class);
+		}
+		HashMap parse = JSON.getInterface().parseObject(resData,HashMap.class);
 		return parse;
 	}
 
@@ -71,7 +72,7 @@ public class AliPay implements IPay {
 		biz_content.put("subject",aliPayParams.getSubject());
 		biz_content.put("body",aliPayParams.getBody());
 		biz_content.put("out_trade_no",aliPayParams.getOutTradeNo());
-		map.put("biz_content", JSON.getJsonInterface().toJsonString(biz_content));
+		map.put("biz_content", JSON.getInterface().toJsonString(biz_content));
 		map.put("sign_type", AlipayUtil.sign_type);
 		Map<String, String> paraFilter = AlipayUtil.paraFilter(map);
 		String createLinkString = AlipayUtil.createLinkString(paraFilter);
@@ -114,7 +115,7 @@ public class AliPay implements IPay {
 		String params = stringBuilder.toString();
 		params = params.substring(0,params.length()-1);
 		String request = HttpUtil.getRequest(AlipayUtil.order_query_url + params);
-		HashMap parse = JSON.getJsonInterface().parseObject(request, HashMap.class);
+		HashMap parse = JSON.getInterface().parseObject(request, HashMap.class);
 //		Map alipay_trade_query_response = (Map) parse.get("alipay_trade_query_response");
 //		String msg = alipay_trade_query_response.get("msg").toString();
 //		if (msg.equals("Success")){

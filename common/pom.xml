@@ -42,17 +42,7 @@
         </dependency>
         <dependency>
             <groupId>com.yz</groupId>
-            <artifactId>common-redis</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-        </dependency>
-        <dependency>
-            <groupId>com.yz</groupId>
             <artifactId>common-security</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-        </dependency>
-        <dependency>
-            <groupId>com.yz</groupId>
-            <artifactId>multiple-data-sources</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
         <dependency>
@@ -62,12 +52,7 @@
         </dependency>
         <dependency>
             <groupId>com.yz</groupId>
-            <artifactId>common-config</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-        </dependency>
-        <dependency>
-            <groupId>com.yz</groupId>
-            <artifactId>common-api-gateway</artifactId>
+            <artifactId>common-web</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
     </dependencies>
@@ -94,12 +79,9 @@
                                     <include>com.yz:common-pay</include>
                                     <include>com.yz:common-cache</include>
                                     <include>com.yz:common-queue</include>
-                                    <include>com.yz:common-redis</include>
                                     <include>com.yz:common-security</include>
-                                    <include>com.yz:multiple-data-sources</include>
                                     <include>com.yz:common-json</include>
-                                    <include>com.yz:common-config</include>
-                                    <include>com.yz:common-api-gateway</include>
+                                    <include>com.yz:common-web</include>
                                 </includes>
                             </artifactSet>
                         </configuration>

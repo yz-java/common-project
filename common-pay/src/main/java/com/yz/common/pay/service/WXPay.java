@@ -27,7 +27,7 @@ public class WXPay implements IPay {
 		params.add(new BasicNameValuePair("nonce_str", genNonceStr()));
 		params.add(new BasicNameValuePair("body", wxCreateOrderParams.getBody()));
 
-		params.add(new BasicNameValuePair("attach", JSON.getJsonInterface().toJsonString(wxCreateOrderParams.getAttach())));
+		params.add(new BasicNameValuePair("attach", JSON.getInterface().toJsonString(wxCreateOrderParams.getAttach())));
 		params.add(new BasicNameValuePair("out_trade_no", wxCreateOrderParams.getOutTradeNo()));
 		params.add(new BasicNameValuePair("total_fee", String.valueOf((int)(wxCreateOrderParams.getTotalFee()*100))));
 		params.add(new BasicNameValuePair("spbill_create_ip", wxCreateOrderParams.getSpbillCreateIp()));
@@ -93,6 +93,7 @@ public class WXPay implements IPay {
 	 * @param orderId
 	 * @return
 	 */
+	@Override
 	public Object queryOrderStatus(String orderId){
 		List<NameValuePair> params = new LinkedList<NameValuePair>();
 		params.add(new BasicNameValuePair("appid", WXPayUtil.APPID));

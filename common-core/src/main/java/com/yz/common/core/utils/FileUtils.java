@@ -26,7 +26,7 @@ public class FileUtils extends org.apache.commons.io.FileUtils {
 		File file = new File(path);
 		try {
 			String data = readFileToString(file);
-			return JSON.getJsonInterface().parseObject(data, clazz);
+			return JSON.getInterface().parseObject(data, clazz);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

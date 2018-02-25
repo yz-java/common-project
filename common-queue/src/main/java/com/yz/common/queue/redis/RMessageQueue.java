@@ -17,7 +17,7 @@ public class RMessageQueue implements IMessageQueue {
     @Override
     public boolean publish(String channel, Object o) {
         Jedis jedis = RedisUtil.getInstance().getJedis();
-        String jsonString = JSON.getJsonInterface().toJsonString(o);
+        String jsonString = JSON.getInterface().toJsonString(o);
         Long publisher = jedis.publish(channel,jsonString);
         logger.info("订阅该频道的人数：" + publisher);
         jedis.close();

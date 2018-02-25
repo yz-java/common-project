@@ -23,7 +23,7 @@ public class IPUtil {
      */
     public static Map query(String ip){
         String request = HttpUtil.getRequest(SINA_API+ip);
-        HashMap responseData = JSON.getJsonInterface().parseObject(request, HashMap.class);
+        HashMap responseData = JSON.getInterface().parseObject(request, HashMap.class);
         Set set = responseData.keySet();
         Iterator iterator = set.iterator();
         while (iterator.hasNext()){
