@@ -1,6 +1,5 @@
 package com.yz.common.pay.util;
 
-import com.yz.common.config.Application;
 import com.yz.common.core.utils.MD5Util;
 import org.apache.http.NameValuePair;
 import java.io.UnsupportedEncodingException;
@@ -37,7 +36,7 @@ public final class WXPayUtil {
         }
         String result = sb.toString();
         result += "key=" +KEY;
-        result = MD5Util.MD5Encode(result, Application.sysConfig.getCharsetName()).toUpperCase();
+        result = MD5Util.MD5Encode(result, "UTF-8").toUpperCase();
         return result;
     }
 

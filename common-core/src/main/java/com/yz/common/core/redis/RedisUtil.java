@@ -10,8 +10,8 @@ import java.util.Set;
 import com.yz.common.core.utils.FileUtils;
 import com.yz.common.core.json.JSON;
 import org.apache.commons.pool2.impl.GenericObjectPoolConfig;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import redis.clients.jedis.*;
 
 /**
@@ -22,7 +22,7 @@ import redis.clients.jedis.*;
 @SuppressWarnings("unused")
 public class RedisUtil {
 	
-	private static final Logger logger = LogManager.getLogger(RedisUtil.class);
+	private static final Logger logger = LoggerFactory.getLogger(RedisUtil.class);
 
 	private static RedisUtil instance = new RedisUtil();
 
@@ -49,6 +49,21 @@ public class RedisUtil {
 	private int dataBase = 0;
 
 	private JedisPool pool = null;
+
+	private String redisHost;
+
+	private String redisPassword;
+
+	private int redisPort;
+
+	public RedisUtil(String redisHost, String redisPassword, int redisPort,int dataBase) {
+		this.redisHost = redisHost;
+		this.redisPassword = redisPassword;
+		this.redisPort = redisPort;
+		GenericObjectPoolConfig e = new GenericObjectPoolConfig();
+		this.pool = new JedisPool(e, redisHost, redisPort, TIMEOUT, redisPassword);
+		this.dataBase = dataBase;
+	}
 
 	/**
 	 * 初始化Redis连接池
