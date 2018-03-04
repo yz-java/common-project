@@ -32,6 +32,6 @@
     </dependencies>
 
     <build>
-        <finalName>common-security</finalName>
+        <finalName>${artifactId}</finalName>
     </build>
 </project>

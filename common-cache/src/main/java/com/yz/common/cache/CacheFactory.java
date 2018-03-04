@@ -1,7 +1,8 @@
 package com.yz.common.cache;
 
 
-import com.yz.common.core.enums.CacheTypeEnum;
+import com.yz.common.cache.jvm.JvmCacheImpl;
+import com.yz.common.cache.redis.RedisTemplateImpl;
 
 /**
  * 缓存工厂类
@@ -10,27 +11,39 @@ import com.yz.common.core.enums.CacheTypeEnum;
  */
 public class CacheFactory {
 
-	private ICache cache;
+	private ICache jedisImpl;
 
-	private static CacheFactory instance = new CacheFactory();
+	private JvmCacheImpl JvmCacheImpl;
 
-	public static CacheFactory getInstance() {
-		return instance;
+	private RedisTemplateImpl redisTemplateImpl;
+
+	public CacheFactory(ICache jedisImpl, JvmCacheImpl JvmCacheImpl, RedisTemplateImpl redisTemplateImpl) {
+		this.jedisImpl = jedisImpl;
+		this.JvmCacheImpl = JvmCacheImpl;
+		this.redisTemplateImpl = redisTemplateImpl;
 	}
 
-	public synchronized void init(int type) {
-		if (type == CacheTypeEnum.JVM.getType()) {
-			cache = new HashListCache();
-		} else if (type == CacheTypeEnum.REDIS.getType()) {
-			cache = new RedisCache();
+
+	public ICache getJedisImpl() {
+		if (jedisImpl==null){
+			throw new RuntimeException("jedisImpl IS NULL");
 		}
+		return jedisImpl;
 	}
 
-	public ICache getDefault() {
-		if (cache==null){
-			throw new RuntimeException("请预先加载该工厂");
+	public ICache getjvmCacheImpl() {
+		if (JvmCacheImpl ==null){
+			throw new RuntimeException("JvmCacheImpl IS NULL");
 		}
-		return cache;
+		return JvmCacheImpl;
+	}
+
+
+	public ICache getRedisTemplateImpl() {
+		if (redisTemplateImpl==null){
+			throw new RuntimeException("redisTemplateImpl IS NULL");
+		}
+		return redisTemplateImpl;
 	}
 
 }

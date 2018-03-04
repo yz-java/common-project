@@ -1,19 +1,16 @@
 package com.yz.common.core.utils;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import java.awt.image.BufferedImage;
 import java.io.*;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
-import java.util.Properties;
-
-import com.yz.common.core.json.JSON;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import javax.imageio.ImageIO;
 
 public class FileUtils extends org.apache.commons.io.FileUtils {
 
-	private static final Logger logger=LogManager.getLogger(FileUtils.class);
+	private static final Logger logger= LoggerFactory.getLogger(FileUtils.class);
 
 	/**
 	 * 读取json文件转对象
@@ -21,38 +18,16 @@ public class FileUtils extends org.apache.commons.io.FileUtils {
 	 * @param clazz
 	 * @return
 	 */
-	public static <T> T readFileToObject(String path, Class<T> clazz) {
+	public static <T> T readJsonFileToObject(String path, Class<T> clazz) {
 		path = FileUtils.class.getResource(path).getFile().toString();
 		File file = new File(path);
 		try {
 			String data = readFileToString(file);
-			return JSON.getInterface().parseObject(data, clazz);
+			return com.alibaba.fastjson.JSON.parseObject(data,clazz);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		return null;
-	}
-
-	/**
-	 * 根据key读取properties文件的值
-	 * @param path	：项目根目录下的路径
-	 * @param key
-	 * @return
-	 */
-	public static String getPropertiesValue(String path, String key) {
-		Properties property = new Properties();
-		InputStream is = FileUtils.class.getResourceAsStream(path);
-		try {
-			property.load(is);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		try {
-			is.close();
-		} catch (IOException e) {
-			logger.error("Close InputStream Fail");
-		}
-		return property.getProperty(key);
 	}
 
 	/**
@@ -132,7 +107,7 @@ public class FileUtils extends org.apache.commons.io.FileUtils {
 			BufferedImage bufferedImage = ImageIO.read(inputStream);
 			int width = bufferedImage.getWidth();
 			int height = bufferedImage.getHeight();
-			System.out.println("宽度:"+width+"----"+"高度:"+height);
+			logger.info("宽度:"+width+"----"+"高度:"+height);
 			return width+","+height;
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -150,7 +125,7 @@ public class FileUtils extends org.apache.commons.io.FileUtils {
 			BufferedImage bufferedImage = ImageIO.read(file);
 			int width = bufferedImage.getWidth();
 			int height = bufferedImage.getHeight();
-			System.out.println("宽度:"+width+"----"+"高度:"+height);
+			logger.info("宽度:"+width+"----"+"高度:"+height);
 			return width+","+height;
 		} catch (IOException e) {
 			e.printStackTrace();

@@ -7,10 +7,12 @@ public class RedisLockUtil {
 
 	private static int expired = 500;
 
-	public static boolean acquireLock(String lock, int count) {
+	private  RedisUtil redisUtil;
+
+	public boolean acquireLock(String lock, int count) {
 		// 1. 通过SETNX试图获取一个lock
 		boolean success = false;
-		Jedis jedis = RedisUtil.getInstance().getJedis();
+		Jedis jedis = redisUtil.getJedis();
 		long value = System.currentTimeMillis()+expired;
 		long acquired = jedis.setnx(lock, String.valueOf(value));
 		//System.out.println("wait lock---" + value);
@@ -58,8 +60,8 @@ public class RedisLockUtil {
 	}
 
 	//释放锁
-	public static void releaseLock(String lock) {
-		Jedis jedis = RedisUtil.getInstance().getJedis();
+	public void releaseLock(String lock) {
+		Jedis jedis = redisUtil.getJedis();
 		long current = System.currentTimeMillis();
 		// 避免删除非自己获取得到的锁
 		String obj = jedis.get(lock);
@@ -76,9 +78,9 @@ public class RedisLockUtil {
 	 * @param time
 	 * @return
 	 */
-	public static boolean requestLock(String key,long time){
+	public boolean requestLock(String key,long time){
 		boolean result=true;
-		Jedis jedis = RedisUtil.getInstance().getJedis();
+		Jedis jedis = redisUtil.getJedis();
 		Long setnx = jedis.setnx(key, String.valueOf(time));
 		if(setnx!=1){
 			String oldValue = jedis.getSet(key, String.valueOf(time));

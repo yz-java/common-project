@@ -64,14 +64,6 @@ public interface ICache {
 	 *            hash key
 	 */
 	public <T> T hashGet(String mname, String key,Class<T> clazz);
-	
-	/**
-	 *
-	 * @param mname
-	 * @param key
-     * @return
-     */
-	public String hashGet(String mname, String key);
 
 
 	/**
@@ -80,7 +72,7 @@ public interface ICache {
 	 * @param mname
 	 *            模块名
 	 */
-	public Map<String, Object> hashGet(String mname);
+	public Map hashGet(String mname);
 
 	/**
 	 * 移除
@@ -216,7 +208,7 @@ public interface ICache {
 
 	/**
 	 * 移除
-	 * 
+	 *
 	 * @param mname
 	 *            模块名
 	 * @param value
