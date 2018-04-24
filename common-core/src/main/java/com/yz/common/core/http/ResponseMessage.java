@@ -8,49 +8,73 @@ public class ResponseMessage {
 
     public ResponseMessage() {}
 
-    public ResponseMessage(int status) {
-        this.status = status;
+    public ResponseMessage(int code, int errorCode, Object data, String errorMessage) {
+        this.code = code;
+        this.errorCode = errorCode;
+        this.data = data;
+        this.errorMessage = errorMessage;
     }
 
-    public ResponseMessage(int status, Object data) {
-        this.status = status;
+    public ResponseMessage(int code) {
+        this.code = code;
+    }
+
+    /**
+     *  构造函数
+     * @param data 正确返回数据
+     */
+    public ResponseMessage(Object data) {
         this.data = data;
     }
 
-    public ResponseMessage(int status, String errorInfo) {
-        this.status = status;
-        this.errorInfo = errorInfo;
+    /**
+     * 构造函数
+     * @param errorCode 错误状态码
+     * @param errorMessage 错误信息
+     */
+    public ResponseMessage(int errorCode, String errorMessage) {
+        this.errorCode=errorCode;
+        this.errorMessage = errorMessage;
     }
 
-    private int status;
+    private int code = 10000;
+
+    private int errorCode;
 
     private Object data;
 
-    private String errorInfo;
+    private String errorMessage;
 
-    public void setStatus(int status) {
-        this.status = status;
+    public void setCode(int code) {
+        this.code = code;
     }
 
-    public void setData(Object data) {
-        this.data = data;
+    public int getCode() {
+        return code;
     }
 
-    public void setInfo(String errorInfo) {
-        this.errorInfo = errorInfo;
+    public int getErrorCode() {
+        return errorCode;
     }
 
-
-    public int getStatus() {
-        return status;
+    public void setErrorCode(int errorCode) {
+        this.errorCode = errorCode;
     }
 
     public Object getData() {
         return data;
     }
 
-    public String getInfo() {
-        return errorInfo;
+    public void setData(Object data) {
+        this.data = data;
+    }
+
+    public String getErrorMessage() {
+        return errorMessage;
+    }
+
+    public void setErrorMessage(String errorMessage) {
+        this.errorMessage = errorMessage;
     }
 
     /**
@@ -58,7 +82,7 @@ public class ResponseMessage {
      * @return
      */
     public static ResponseMessage success(){
-        return new ResponseMessage(0,null);
+        return new ResponseMessage();
     }
 
     /**
@@ -67,18 +91,22 @@ public class ResponseMessage {
      * @return
      */
     public static ResponseMessage success(Object data){
-        return new ResponseMessage(0,data);
+        return new ResponseMessage(data);
     }
 
     /**
      * 失败
      * @param errorCode 错误码
+     * @param errorMessage 错误信息
      * @return
      */
-    public static ResponseMessage error(int errorCode){
-        return new ResponseMessage(errorCode);
+    public static ResponseMessage error(int code,int errorCode,String errorMessage){
+        ResponseMessage responseMessage = new ResponseMessage();
+        responseMessage.setCode(code);
+        responseMessage.setErrorCode(errorCode);
+        responseMessage.setErrorMessage(errorMessage);
+        return responseMessage;
     }
-
     /**
      * 失败
      * @param errorCode 错误码

@@ -24,7 +24,7 @@
         <repository>
             <id>nexus</id>
             <name>Nexus Repository</name>
-            <url>http://nexus.huamaiwebchat.com/nexus/content/groups/public</url>
+            <url>http://nexus.lingzhuworld.cn/nexus/content/groups/public</url>
             <snapshots>
                 <enabled>true</enabled>
             </snapshots>
@@ -36,7 +36,7 @@
         <snapshotRepository>
             <id>snapshots</id>
             <name>Snapshots</name>
-            <url>http://nexus.huamaiwebchat.com/nexus/content/repositories/snapshots/</url>
+            <url>http://nexus.lingzhuworld.cn/nexus/content/repositories/snapshots/</url>
         </snapshotRepository>
     </distributionManagement>
 

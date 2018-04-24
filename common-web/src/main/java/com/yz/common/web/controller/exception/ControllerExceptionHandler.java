@@ -3,6 +3,8 @@ package com.yz.common.web.controller.exception;
 import com.alibaba.fastjson.JSON;
 import com.yz.common.core.exception.HandlerException;
 import com.yz.common.core.http.ResponseMessage;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.BindException;
@@ -27,16 +29,18 @@ import java.util.Set;
 @Component
 public class ControllerExceptionHandler {
 
+    private final Logger logger = LoggerFactory.getLogger(ControllerExceptionHandler.class);
+
     @ExceptionHandler
     @ResponseBody
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ResponseStatus(HttpStatus.OK)
     public String handle(Exception exception) {
-
+        logger.error("错误信息  ====  "+exception.getMessage());
         if (exception instanceof BindException) {
             BindException bindException = (BindException) exception;
             List<FieldError> fieldErrors = bindException.getFieldErrors();
             for (FieldError fieldError : fieldErrors) {
-                return JSON.toJSONString(new ResponseMessage(-1, fieldError.getField() + fieldError.getDefaultMessage()));
+                return JSON.toJSONString(ResponseMessage.error(10010,fieldError.getField() + fieldError.getDefaultMessage()));
             }
         }
 
@@ -45,18 +49,18 @@ public class ControllerExceptionHandler {
 
             Set<ConstraintViolation<?>> violations = exs.getConstraintViolations();
             for (ConstraintViolation<?> violation : violations) {
-                return JSON.toJSONString(new ResponseMessage(-1, violation.getPropertyPath() + violation.getMessage()));
+                return JSON.toJSONString(ResponseMessage.error(10010,violation.getPropertyPath() + violation.getMessage()));
             }
         }
         if (exception instanceof HandlerException) {
             HandlerException handlerException = (HandlerException) exception;
-            return JSON.toJSONString(new ResponseMessage(0, handlerException.getErrorInfo()));
+            return JSON.toJSONString(new ResponseMessage(handlerException.getCode(), handlerException.getErrorInfo()));
         }
         if (exception instanceof MissingServletRequestParameterException) {
             MissingServletRequestParameterException missingServletRequestParameterException = (MissingServletRequestParameterException) exception;
-            return JSON.toJSONString(new ResponseMessage(0, "请求参数" + missingServletRequestParameterException.getParameterName() + "不能为空"));
+            return JSON.toJSONString(ResponseMessage.error(10010, "请求参数" + missingServletRequestParameterException.getParameterName() + "不能为空"));
         }
 
-        return JSON.toJSONString(new ResponseMessage(0, exception.getMessage()));
+        return JSON.toJSONString(ResponseMessage.error(0, "服务异常"));
     }
 }

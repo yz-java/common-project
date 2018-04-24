@@ -5,8 +5,11 @@ package com.yz.common.core.exception;
  */
 public class HandlerException extends Exception {
 
-    public HandlerException(int message) {
+    private int code;
+
+    public HandlerException(int code,String message) {
         super(String.valueOf(message));
+        this.code = code;
     }
     public HandlerException(String message) {
         super(String.valueOf(message));
@@ -14,5 +17,9 @@ public class HandlerException extends Exception {
 
     public String getErrorInfo(){
         return super.getMessage();
+    }
+
+    public int getCode(){
+        return code;
     }
 }

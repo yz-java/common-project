@@ -1,5 +1,6 @@
 package com.yz.common.web.springmvc.interceptor;
 
+import com.alibaba.fastjson.JSON;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -25,8 +26,9 @@ public class BaseInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o) throws Exception {
         logger.info(httpServletRequest.getRequestURL().toString());
-        //默认返回json数据
+        //设置header头数据返回类型
         httpServletResponse.setContentType("content-type: application/json; charset=utf-8;");
+        logger.info("请求参数："+ JSON.toJSONString(httpServletRequest.getParameterMap()));
         return true;
     }
 
