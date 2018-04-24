@@ -3,6 +3,7 @@ package com.yz.common.web.controller.exception;
 import com.alibaba.fastjson.JSON;
 import com.yz.common.core.exception.HandlerException;
 import com.yz.common.core.http.ResponseMessage;
+import org.apache.commons.fileupload.FileUploadException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -59,6 +60,10 @@ public class ControllerExceptionHandler {
         if (exception instanceof MissingServletRequestParameterException) {
             MissingServletRequestParameterException missingServletRequestParameterException = (MissingServletRequestParameterException) exception;
             return JSON.toJSONString(ResponseMessage.error(10010, "请求参数" + missingServletRequestParameterException.getParameterName() + "不能为空"));
+        }
+        if (exception instanceof FileUploadException) {
+            FileUploadException fileUploadException = (FileUploadException) exception;
+            return JSON.toJSONString(ResponseMessage.error(10010, fileUploadException.getMessage()));
         }
 
         return JSON.toJSONString(ResponseMessage.error(0, "服务异常"));
