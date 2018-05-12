@@ -9,8 +9,12 @@ import javassist.bytecode.CodeAttribute;
 import javassist.bytecode.LocalVariableAttribute;
 import javassist.bytecode.MethodInfo;
 import org.springframework.util.ClassUtils;
+
+import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by yangzhao on 17/8/2.
@@ -86,18 +90,55 @@ public class ClassUtil extends ClassUtils {
         CtMethod cm = clz.getDeclaredMethod(method.getName(), params);
         MethodInfo methodInfo = cm.getMethodInfo();
         CodeAttribute codeAttribute = methodInfo.getCodeAttribute();
-        if (codeAttribute==null)
+        if (codeAttribute==null) {
             return null;
+        }
         LocalVariableAttribute attr = (LocalVariableAttribute) codeAttribute
                 .getAttribute(LocalVariableAttribute.tag);
         int pos = Modifier.isStatic(cm.getModifiers()) ? 0 : 1;
         String[] paramNames = new String[cm.getParameterTypes().length];
-        if (attr==null)
+        if (attr==null) {
             return null;
+        }
         for (int i = 0; i < paramNames.length; i++) {
             paramNames[i] = attr.variableName(i + pos);
         }
         return paramNames;
     }
 
+    /**
+     * 获取Class 属性与类型映射
+     * @param c
+     * @return
+     */
+    public static Map<String,String> getClassFieldTypeMapping(Class c){
+        Map<String,String> fieldType = new HashMap();
+        Field[] declaredFields = c.getDeclaredFields();
+        for (Field field:declaredFields){
+            fieldType.put(field.getName(),field.getType().getSimpleName());
+        }
+        return fieldType;
+    }
+
+    /**
+     * 获取属性值不为null的属性名称与值的映射
+     * @param t
+     * @param <T>
+     * @return
+     * @throws Exception
+     */
+    public static <T> Map<String,Object> getNotNullFieldNameAndVauleMapping(T t) throws Exception {
+        Field[] declaredFields = t.getClass().getDeclaredFields();
+        Map fieldNameAndVauleMap = new HashMap();
+        for (Field field:declaredFields){
+            String name = field.getName();
+            String methodName = createFieldMethodName("get", name);
+            Method declaredMethod = t.getClass().getDeclaredMethod(methodName, null);
+            Object invoke = declaredMethod.invoke(t, null);
+            if (invoke!=null){
+                fieldNameAndVauleMap.put(name,invoke);
+            }
+        }
+        return fieldNameAndVauleMap;
+    }
 }

@@ -30,11 +30,6 @@
         </dependency>
         <dependency>
             <groupId>com.yz</groupId>
-            <artifactId>common-queue</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-        </dependency>
-        <dependency>
-            <groupId>com.yz</groupId>
             <artifactId>common-security</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
@@ -66,7 +61,6 @@
                                     <include>com.yz:common-core</include>
                                     <include>com.yz:common-pay</include>
                                     <include>com.yz:common-cache</include>
-                                    <include>com.yz:common-queue</include>
                                     <include>com.yz:common-security</include>
                                     <include>com.yz:common-web</include>
                                 </includes>

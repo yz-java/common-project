@@ -12,10 +12,8 @@ import java.util.Map;
  * @Description
  * @Date create by 22:26 18/3/3
  */
-@Component
 public class RedisTemplateImpl extends RedisCache {
 
-    @Resource
     private RedisTemplate redisTemplate;
 
     public RedisTemplateImpl(RedisTemplate redisTemplate){
