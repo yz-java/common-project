@@ -12,6 +12,7 @@
         <module>common</module>
         <module>common-pay</module>
         <module>common-web</module>
+        <module>common-elasticsearch</module>
     </modules>
     <packaging>pom</packaging>
 

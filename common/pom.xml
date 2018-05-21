@@ -38,6 +38,11 @@
             <artifactId>common-web</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
+        <dependency>
+            <groupId>com.yz</groupId>
+            <artifactId>common-elasticsearch</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -63,6 +68,7 @@
                                     <include>com.yz:common-cache</include>
                                     <include>com.yz:common-security</include>
                                     <include>com.yz:common-web</include>
+                                    <include>com.yz:common-elasticsearch</include>
                                 </includes>
                             </artifactSet>
                         </configuration>
