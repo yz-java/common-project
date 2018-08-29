@@ -6,6 +6,7 @@ import java.awt.image.BufferedImage;
 import java.io.*;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
+import java.util.Map;
 import javax.imageio.ImageIO;
 
 public class FileUtils extends org.apache.commons.io.FileUtils {
@@ -143,5 +144,31 @@ public class FileUtils extends org.apache.commons.io.FileUtils {
 		String parent = oldFile.getParent();
 		File newFile = new File(parent+"/"+newFileName);
 		oldFile.renameTo(newFile);
+	}
+
+	/**
+	 * 递归读取文件所在路径
+	 * @param filePath 路径
+	 * @param fileName 文件名
+	 * @return
+	 */
+	public static String recursionReadFile(String filePath,String fileName){
+		File file = new File(filePath);
+		File[] files = file.listFiles();
+		for (File f:files){
+			if (f.getName().equals(fileName)){
+				return file.getAbsolutePath()+"/"+f.getName();
+			}
+		}
+
+		for (File f:files){
+			String readPath=filePath+"/"+f.getName();
+			file = new File(readPath);
+			if (file.isDirectory()){
+				return recursionReadFile(readPath, fileName);
+			}
+		}
+
+		return null;
 	}
 }
