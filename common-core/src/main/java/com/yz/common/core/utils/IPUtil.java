@@ -12,9 +12,9 @@ import java.util.Set;
  */
 public class IPUtil {
 
-    private static final String SINA_API="http://int.dpool.sina.com.cn/iplookup/iplookup.php?format=json&ip=";
+    private static final String SINA_API="message://int.dpool.sina.com.cn/iplookup/iplookup.php?format=json&ip=";
     
-    private static final String TAOBAO_API="http://ip.taobao.com/service/getIpInfo.php?ip=";
+    private static final String TAOBAO_API="message://ip.taobao.com/service/getIpInfo.php?ip=";
 
     /**
      * 免费IP查询接口

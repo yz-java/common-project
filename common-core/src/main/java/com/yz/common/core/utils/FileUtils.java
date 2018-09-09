@@ -6,7 +6,6 @@ import java.awt.image.BufferedImage;
 import java.io.*;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
-import java.util.Map;
 import javax.imageio.ImageIO;
 
 public class FileUtils extends org.apache.commons.io.FileUtils {

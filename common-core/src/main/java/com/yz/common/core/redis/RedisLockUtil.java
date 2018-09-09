@@ -9,6 +9,12 @@ public class RedisLockUtil {
 
 	private  RedisUtil redisUtil;
 
+	/**
+	 *
+	 * @param lock
+	 * @param count 重试次数
+	 * @return
+	 */
 	public boolean acquireLock(String lock, int count) {
 		// 1. 通过SETNX试图获取一个lock
 		boolean success = false;

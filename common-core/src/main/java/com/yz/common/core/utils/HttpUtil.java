@@ -80,7 +80,7 @@ public class HttpUtil {
 			String result = EntityUtils.toString(entity,CHARSET_NAME);
 			return result;
 		} catch (Exception e) {
-			logger.error("http req error", e);
+			logger.error("message req error", e);
 			return null;
 		}
 	}
@@ -101,7 +101,7 @@ public class HttpUtil {
 			}
 			return res.toString();
 		} catch (Exception e) {
-			logger.error("http req error=" + url, e);
+			logger.error("message req error=" + url, e);
 			return null;
 		}
 	}
@@ -118,13 +118,13 @@ public class HttpUtil {
 			HttpEntity entity = response.getEntity();
 			result = EntityUtils.toString(entity, "UTF-8");
 		} catch (ConnectionPoolTimeoutException e) {
-			logger.error("http get throw ConnectionPoolTimeoutException(wait time out)");
+			logger.error("message get throw ConnectionPoolTimeoutException(wait time out)");
 		} catch (ConnectTimeoutException e) {
-			logger.error("http get throw ConnectTimeoutException");
+			logger.error("message get throw ConnectTimeoutException");
 		} catch (SocketTimeoutException e) {
-			logger.error("http get throw SocketTimeoutException");
+			logger.error("message get throw SocketTimeoutException");
 		} catch (Exception e) {
-			logger.error("http get throw Exception");
+			logger.error("message get throw Exception");
 		} finally {
 			httpPost.abort();
 		}
@@ -148,13 +148,13 @@ public class HttpUtil {
 			HttpEntity entity = response.getEntity();
 			result = EntityUtils.toString(entity, "UTF-8");
 		} catch (ConnectionPoolTimeoutException e) {
-			logger.error("http get throw ConnectionPoolTimeoutException(wait time out)");
+			logger.error("message get throw ConnectionPoolTimeoutException(wait time out)");
 		} catch (ConnectTimeoutException e) {
-			logger.error("http get throw ConnectTimeoutException");
+			logger.error("message get throw ConnectTimeoutException");
 		} catch (SocketTimeoutException e) {
-			logger.error("http get throw SocketTimeoutException");
+			logger.error("message get throw SocketTimeoutException");
 		} catch (Exception e) {
-			logger.error("http get throw Exception");
+			logger.error("message get throw Exception");
 		} finally {
 			httpPost.abort();
 		}

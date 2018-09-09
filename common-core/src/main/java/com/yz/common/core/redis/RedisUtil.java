@@ -1,10 +1,8 @@
 package com.yz.common.core.redis;
 
-import java.io.InputStream;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-
 import com.alibaba.fastjson.JSON;
 import com.yz.common.core.utils.PropertyUtil;
 import org.apache.commons.pool2.impl.GenericObjectPoolConfig;
@@ -72,7 +70,6 @@ public class RedisUtil {
 
 
     public RedisUtil(String propertiesUri) {
-        InputStream is = null;
         GenericObjectPoolConfig genericObjectPoolConfig = new GenericObjectPoolConfig();
         genericObjectPoolConfig.setMaxTotal(MAX_ACTIVE);
         genericObjectPoolConfig.setMaxIdle(MAX_IDLE);

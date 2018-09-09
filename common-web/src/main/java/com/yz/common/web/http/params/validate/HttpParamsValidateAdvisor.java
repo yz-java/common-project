@@ -3,7 +3,7 @@ package com.yz.common.web.http.params.validate;
 import com.alibaba.fastjson.JSON;
 import com.yz.common.core.configuration.ValidatorConfiguration;
 import com.yz.common.core.exception.HandlerException;
-import com.yz.common.core.http.ResponseMessage;
+import com.yz.common.core.message.ResponseMessage;
 import com.yz.common.core.utils.ClassUtil;
 import com.yz.common.web.annotations.HttpParam;
 import com.yz.common.web.annotations.ParamsValidate;

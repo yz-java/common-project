@@ -57,13 +57,9 @@ public class JedisImpl extends RedisCache {
 	@Override
 	public void hashSet(String mname, Map<String, Object> map) {
 		Map<String,String> data=new HashMap<>();
-		Set<String> keySet = map.keySet();
-		Iterator<String> iterator = keySet.iterator();
-		while(iterator.hasNext()){
-			String key=iterator.next();
-			Object obj=map.get(key);
-			data.put(key, JSON.toJSONString(obj));
-		}
+		map.forEach((k,v)->{
+			data.put(k, JSON.toJSONString(v));
+		});
 		redisUtil.hmset(mname, data);
 	}
 

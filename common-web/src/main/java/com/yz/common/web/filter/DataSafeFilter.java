@@ -1,11 +1,10 @@
 package com.yz.common.web.filter;
 
 import com.alibaba.fastjson.JSON;
-import com.yz.common.core.http.ResponseMessage;
+import com.yz.common.core.message.ResponseMessage;
 import com.yz.common.core.utils.HttpUtil;
 import com.yz.common.core.utils.StringUtils;
-import com.yz.common.security.aes.AES;
-import com.yz.common.security.aes.AES_CBC;
+import com.yz.common.security.ISecurity;
 import com.yz.common.web.IHttpServletRequestWrapper;
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
@@ -23,10 +22,10 @@ import java.util.Set;
  */
 public class DataSafeFilter extends BaseFilter {
 
-    private AES aes = new AES_CBC();
+    private ISecurity iSecurity;
 
-    public void setAes(AES aes) {
-        this.aes = aes;
+    public void setiSecurity(ISecurity iSecurity) {
+        this.iSecurity = iSecurity;
     }
 
     @Override
@@ -50,7 +49,7 @@ public class DataSafeFilter extends BaseFilter {
             String strData = new String(data, "UTF-8");
             logger.info("解密前数据：" + strData);
             if (!StringUtils.isEmpty(strData)){
-                strData = aes.decrypt(strData);
+                strData = iSecurity.Decrypt(strData);
                 logger.info("请求数据data:" + strData);
                 if (StringUtils.isEmpty(strData)){
                     chain.doFilter(iHttpServletRequestWrapper,response);

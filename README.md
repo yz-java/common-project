@@ -10,13 +10,11 @@ Java后端常用工具类、缓存接口、消息队列接口、第三方支付�
 
 ② 基于redis进行数据缓存
 
-## 2.消息队列（common-queue）
+## 2.ES（common-elasticsearch）
 
-① 基于Java ArrayBlockingQueue
+① ElasticSearch 增删改操作
 
-② 基于redis 发布订阅实现消息队列
-
-▲ 后期会维护kafka和阿里巴巴RocketMQ
+② ElasticSearch 高级查询（链式调用）
 
 ## 3.常用工具类(common-core)
 

@@ -1,4 +1,4 @@
-package com.yz.common.core.http;
+package com.yz.common.core.message;
 
 /**
  * http请求返回消息

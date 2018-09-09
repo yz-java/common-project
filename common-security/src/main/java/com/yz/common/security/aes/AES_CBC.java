@@ -1,28 +1,35 @@
 package com.yz.common.security.aes;
 
+import com.yz.common.security.ISecurity;
 import sun.misc.BASE64Decoder;
 import sun.misc.BASE64Encoder;
 
 import javax.crypto.Cipher;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
+import java.util.Map;
 
 /**
  * @author yangzhao
  * @Description
  * @Date create by 15:49 18/2/3
  */
-public class AES_CBC implements AES {
+public class AES_CBC implements ISecurity {
     /**
      * 加密用的Key 可以用26个字母和数字组成
      * 此处使用AES-128-CBC加密模式，key需要为16位。
      */
-    private static String sKey = "B31F2A75FBF94099";
-    private static String ivParameter = "1234567890123456";
+    private String sKey = "B31F2A75FBF94099";
+    private String ivParameter = "1234567890123456";
+
+    public AES_CBC(String sKey,String ivParameter){
+        this.sKey=sKey;
+        this.ivParameter=ivParameter;
+    }
 
     // 加密
     @Override
-    public String encrypt(String sSrc) throws Exception {
+    public String Encrypt(String sSrc) throws Exception {
         Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
         byte[] raw = sKey.getBytes();
         SecretKeySpec skeySpec = new SecretKeySpec(raw, "AES");
@@ -34,7 +41,7 @@ public class AES_CBC implements AES {
 
     // 解密
     @Override
-    public String decrypt(String sSrc) throws Exception {
+    public String Decrypt(String sSrc) throws Exception {
         try {
             byte[] raw = sKey.getBytes("ASCII");
             SecretKeySpec skeySpec = new SecretKeySpec(raw, "AES");
@@ -48,5 +55,10 @@ public class AES_CBC implements AES {
         } catch (Exception ex) {
             return null;
         }
+    }
+
+    @Override
+    public String Sign(String content, String privateKey) throws Exception {
+        return null;
     }
 }

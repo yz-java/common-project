@@ -112,8 +112,7 @@ public class ESSearch<T> {
         if (StringUtils.isEmpty(indexName)&& ArrayUtils.isEmpty(types)){
             throw new Exception("indexName or types is null");
         }
-        SearchRequestBuilder searchRequestBuilder = transportClient.prepareSearch(this.indexName);
-        searchRequestBuilder.setTypes(this.types);
+        SearchRequestBuilder searchRequestBuilder = transportClient.prepareSearch(this.indexName).setTypes(this.types);
         if (page>0&&pageSize>0){
             searchRequestBuilder.setFrom(this.page).setSize(this.pageSize);
         }
@@ -128,10 +127,10 @@ public class ESSearch<T> {
         //按字段排序
         if (!StringUtils.isEmpty(sortField)){
             String[] split = sortField.split(" ");
-            if (split[1].equals("asc")){
+            if (split[1].equalsIgnoreCase("asc")){
                 searchRequestBuilder.addSort(split[0], SortOrder.ASC);
             }
-            if (split[1].equals("desc")){
+            if (split[1].equalsIgnoreCase("desc")){
                 searchRequestBuilder.addSort(split[0], SortOrder.DESC);
             }
 
@@ -153,8 +152,6 @@ public class ESSearch<T> {
         searchRequestBuilder.setQuery(boolQuery);
         // 设置是否按查询匹配度排序
         searchRequestBuilder.setExplain(true);
-        //打印的内容 可以在 Elasticsearch head 和 Kibana  上执行查询
-        logger.info("\n{}", searchRequestBuilder);
         SearchResponse searchResponse = searchRequestBuilder.execute().actionGet();
         long totalHits = searchResponse.getHits().totalHits;
         long length = searchResponse.getHits().getHits().length;

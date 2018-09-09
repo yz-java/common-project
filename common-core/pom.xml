@@ -20,12 +20,6 @@
     </properties>
 
     <dependencies>
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>3.8.1</version>
-            <scope>test</scope>
-        </dependency>
 
         <dependency>
             <groupId>org.apache.httpcomponents</groupId>
@@ -38,20 +32,6 @@
             <groupId>org.apache.solr</groupId>
             <artifactId>solr-solrj</artifactId>
             <version>${solrj.version}</version>
-        </dependency>
-
-        <!-- https://mvnrepository.com/artifact/org.swinglabs/pdf-renderer -->
-        <dependency>
-            <groupId>org.swinglabs</groupId>
-            <artifactId>pdf-renderer</artifactId>
-            <version>1.0.5</version>
-        </dependency>
-
-        <!-- https://mvnrepository.com/artifact/org.icepdf.os/icepdf-core -->
-        <dependency>
-            <groupId>org.icepdf.os</groupId>
-            <artifactId>icepdf-core</artifactId>
-            <version>6.2.2</version>
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/org.apache.poi/poi -->
