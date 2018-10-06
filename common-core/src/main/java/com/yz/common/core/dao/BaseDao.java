@@ -1,5 +1,8 @@
 package com.yz.common.core.dao;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.util.List;
 
 /**
@@ -8,6 +11,8 @@ import java.util.List;
  * @Date create by 11:32 18/1/2
  */
 public interface BaseDao<E> {
+
+    public final Logger logger = LoggerFactory.getLogger(BaseDao.class);
 
     boolean deleteByPrimaryKey(Long id);
 
