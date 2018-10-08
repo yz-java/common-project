@@ -11,7 +11,7 @@ public class Page<T> {
     /**
      * 当前页
      */
-    private int index;
+    private int currentPage;
     /**
      * 每页显示数量
      */
@@ -27,17 +27,17 @@ public class Page<T> {
 
     public Page(){}
 
-    public Page(int index, int pageSize) {
-        this.index = index;
+    public Page(int currentPage, int pageSize) {
+        this.currentPage = currentPage;
         this.pageSize = pageSize;
     }
 
-    public int getIndex() {
-        return index;
+    public int getCurrentPage() {
+        return currentPage;
     }
 
-    public void setIndex(int index) {
-        this.index = index;
+    public void setCurrentPage(int currentPage) {
+        this.currentPage = currentPage;
     }
 
     public int getPageSize() {
