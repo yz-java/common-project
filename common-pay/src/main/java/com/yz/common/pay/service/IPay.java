@@ -11,7 +11,7 @@ public interface IPay {
 	 * 创建订单
 	 * @param t
 	 */
-	public <T> String createOrder(T t);
+	public <T> Object createOrder(T t);
 	/**
 	 * 退款
 	 * @param

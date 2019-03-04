@@ -3,14 +3,14 @@
     <parent>
         <artifactId>common-project</artifactId>
         <groupId>com.yz</groupId>
-        <version>1.0.0</version>
+        <version>0.0.1-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>common-pay</artifactId>
+    <artifactId>common-security</artifactId>
     <packaging>jar</packaging>
 
-    <name>${artifactId}</name>
+    <name>common-security</name>
     <url>http://maven.apache.org</url>
 
     <properties>
@@ -18,13 +18,17 @@
     </properties>
 
     <dependencies>
-
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>3.8.1</version>
+            <scope>test</scope>
+        </dependency>
         <dependency>
             <groupId>com.yz</groupId>
             <artifactId>common-core</artifactId>
-            <version>1.0.0</version>
+            <version>0.0.1-SNAPSHOT</version>
         </dependency>
-
     </dependencies>
 
     <build>

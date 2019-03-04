@@ -10,11 +10,11 @@ import java.util.Map;
 
 public final class WXPayUtil {
 
-	public static final String KEY="";
+	public static String KEY="";
 
-	public static final String APPID="";
+	public static String APPID="";
 
-	public static final String MCHID="";
+	public static String MCHID="";
     /**
      * 微信回调接口
      */
@@ -23,7 +23,7 @@ public final class WXPayUtil {
 	public static  String getSign(Map<String,String> map){
         ArrayList<String> list = new ArrayList<String>();
         for(Map.Entry<String,String> entry:map.entrySet()){
-            if(entry.getValue()!=""){
+            if(entry.getValue()!=""&& !entry.getKey().equalsIgnoreCase("sign")){
                 list.add(entry.getKey() + "=" + entry.getValue() + "&");
             }
         }
@@ -44,6 +44,7 @@ public final class WXPayUtil {
 		ArrayList<String> list = new ArrayList<String>();
 		StringBuilder sb = new StringBuilder();
 		for(NameValuePair pair:params){
+		    if (pair.getValue()!=""&& !pair.getValue().equalsIgnoreCase("sign"))
 			list.add(pair.getName() + "=" + pair.getValue() + "&");
 		}
 		int size = list.size();

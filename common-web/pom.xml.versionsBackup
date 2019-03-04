@@ -3,14 +3,14 @@
     <parent>
         <artifactId>common-project</artifactId>
         <groupId>com.yz</groupId>
-        <version>1.0.0</version>
+        <version>0.0.1-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>common-pay</artifactId>
+    <artifactId>common-web</artifactId>
     <packaging>jar</packaging>
 
-    <name>${artifactId}</name>
+    <name>common-web</name>
     <url>http://maven.apache.org</url>
 
     <properties>
@@ -20,9 +20,19 @@
     <dependencies>
 
         <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webmvc</artifactId>
+            <version>${org.springframework.version}</version>
+        </dependency>
+        <dependency>
             <groupId>com.yz</groupId>
             <artifactId>common-core</artifactId>
-            <version>1.0.0</version>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.yz</groupId>
+            <artifactId>common-security</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
         </dependency>
 
     </dependencies>

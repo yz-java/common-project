@@ -2,6 +2,7 @@ package com.yz.common.pay.bean;
 
 import com.yz.common.pay.util.WXPayUtil;
 
+import javax.validation.constraints.NotNull;
 import java.util.Map;
 
 /**
@@ -10,14 +11,18 @@ import java.util.Map;
 public class WXCreateOrderParams extends WXRequestParams {
 
     //商品描述
+    @NotNull
     private String body = "";
     //附加参数
     private Map<String,String> attach;
     //商户订单号
+    @NotNull
     private String outTradeNo;
     //总金额
+    @NotNull
     private double totalFee;
     //终端IP
+    @NotNull
     private String spbillCreateIp;
     /**
      * 交易结束时间
@@ -25,7 +30,8 @@ public class WXCreateOrderParams extends WXRequestParams {
      */
     private String timeExpire;
 
-    private String notifyUrl = WXPayUtil.pay_notify_url;
+    @NotNull
+    private String notifyUrl;
 
     private String tradeType = "APP";
 

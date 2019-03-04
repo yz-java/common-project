@@ -3,26 +3,28 @@
     <parent>
         <artifactId>common-project</artifactId>
         <groupId>com.yz</groupId>
-        <version>1.0.0</version>
+        <version>0.0.1-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>common-pay</artifactId>
+    <artifactId>common-cache</artifactId>
     <packaging>jar</packaging>
 
-    <name>${artifactId}</name>
+    <name>common-cache</name>
     <url>http://maven.apache.org</url>
-
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    </properties>
 
     <dependencies>
 
         <dependency>
             <groupId>com.yz</groupId>
             <artifactId>common-core</artifactId>
-            <version>1.0.0</version>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.springframework.data/spring-data-redis -->
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-redis</artifactId>
+            <version>2.0.5.RELEASE</version>
         </dependency>
 
     </dependencies>

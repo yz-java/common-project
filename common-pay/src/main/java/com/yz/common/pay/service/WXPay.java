@@ -19,7 +19,7 @@ import java.util.*;
 public class WXPay implements IPay {
 
 	@Override
-	public <T> String createOrder(T order) {
+	public <T> Map<String, Object> createOrder(T order) {
 		WXCreateOrderParams wxCreateOrderParams = (WXCreateOrderParams) order;
 		List<NameValuePair> params = new LinkedList<NameValuePair>();
 		params.add(new BasicNameValuePair("appid",wxCreateOrderParams.getAppId()));
@@ -34,8 +34,8 @@ public class WXPay implements IPay {
 		String timeExpire= DateUtils.FormatDate(DateUtils.getDate(new Date(System.currentTimeMillis()),+30), "yyyyMMddHHmmss");
 		logger.debug("微信生成预支付订单交易结束时间："+timeExpire);
 		params.add(new BasicNameValuePair("time_expire",timeExpire));//订单失效时间
-		params.add(new BasicNameValuePair("notify_url", WXPayUtil.pay_notify_url));//异步通知
-		params.add(new BasicNameValuePair("trade_type", "APP"));
+		params.add(new BasicNameValuePair("notify_url", wxCreateOrderParams.getNotifyUrl()));//异步通知
+		params.add(new BasicNameValuePair("trade_type", wxCreateOrderParams.getTradeType()));
 		String sign = WXPayUtil.getSign(params);//签名
 		params.add(new BasicNameValuePair("sign", sign));
 		String reqData = XMLUtil.toXml(params);
@@ -49,8 +49,8 @@ public class WXPay implements IPay {
 		String resultCode = map.get("result_code").toString();
 		if (resultCode.equalsIgnoreCase("SUCCESS")) {
 			//预支付订单生成成功，返回prepay_id
-			String prepayId = map.get("prepay_id").toString();
-			return prepayId;
+//			String prepayId = map.get("prepay_id").toString();
+			return map;
 		}
 		return null;
 	}
