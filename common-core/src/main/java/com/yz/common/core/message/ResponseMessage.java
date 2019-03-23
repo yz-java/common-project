@@ -37,7 +37,7 @@ public class ResponseMessage {
         this.errorMessage = errorMessage;
     }
 
-    private int code = 10000;
+    private int code = 200;
 
     private int errorCode;
 
