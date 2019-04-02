@@ -6,6 +6,7 @@ package com.yz.common.core.utils;
  * @auther yangzhao
  * create by 17/9/19
  */
+@Deprecated
 public class SnowflakeID {
 
     /**

@@ -4,7 +4,7 @@ import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class StringUtils extends org.springframework.util.StringUtils {
+public class StringUtils extends org.apache.commons.lang3.StringUtils {
 	public static int isAcronym(String word)
 	 {
 	  for(int i = 0; i < word.length(); i++)
