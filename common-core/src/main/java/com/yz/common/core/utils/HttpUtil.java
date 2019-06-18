@@ -60,6 +60,9 @@ public class HttpUtil {
 			ip = request.getHeader("HTTP_X_FORWARDED_FOR");
 		}
 		if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+			ip = request.getHeader("X-Real-IP");
+		}
+		if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
 			ip = request.getRemoteAddr();
 		}
 		return ip;
@@ -237,7 +240,7 @@ public class HttpUtil {
 	public static String sendPostForm(String url,List<NameValuePair> params){
 		HttpClient client=HttpClients.createDefault();
 		HttpPost post=new HttpPost(url);
-		post.setHeader("ContentType","application/x-www-form-urlencoded;charset=UTF-8");
+		post.addHeader("Content-Type","application/x-www-form-urlencoded;charset=utf-8");
 		try {
 			UrlEncodedFormEntity entity=new UrlEncodedFormEntity(params, "UTF-8");
 			post.setEntity(entity);
