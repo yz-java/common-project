@@ -5,8 +5,9 @@ import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.*;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -20,7 +21,7 @@ import java.util.List;
  */
 public class Jackson implements IJsonInterface {
 
-    private static final Logger logger= LogManager.getLogger(Jackson.class);
+    private static final Logger logger= LoggerFactory.getLogger(Jackson.class);
 
     @Override
     public <T> T parseObject(String json, Class<T> t) {

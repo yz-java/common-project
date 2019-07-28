@@ -1,8 +1,12 @@
 package com.yz.common.web.utils;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintWriter;
 import java.util.Enumeration;
 import java.util.HashMap;
@@ -14,6 +18,8 @@ import java.util.Map;
  * @Date create by 17:05 18/4/23
  */
 public class WebUtil {
+
+    private static final Logger logger = LoggerFactory.getLogger(WebUtil.class);
 
     /**
      * webserver返回信息
@@ -96,6 +102,36 @@ public class WebUtil {
             ip = request.getRemoteAddr();
         }
         return ip;
+    }
+
+    /**
+     * request对象转字节
+     * @param request
+     * @return
+     */
+    public static byte[] getRequestByteArray(HttpServletRequest request) {
+        byte[] dataOrigin=null;
+        InputStream is = null;
+        try {
+            int contentLength = request.getContentLength();
+            if (contentLength <= 0) {
+                return null;
+            }
+            dataOrigin= new byte[contentLength];
+            is = request.getInputStream();
+            is.read(dataOrigin);
+        } catch (Exception e) {
+            logger.error("request对象转字节失败！", e);
+        }finally {
+            try {
+                if (is!=null){
+                    is.close();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return dataOrigin;
     }
 
 }

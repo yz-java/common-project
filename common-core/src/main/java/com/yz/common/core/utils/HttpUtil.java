@@ -6,8 +6,7 @@ import java.net.URI;
 import java.security.KeyStore;
 import java.util.*;
 import javax.net.ssl.SSLContext;
-import javax.servlet.http.HttpServletRequest;
-
+import org.apache.commons.collections4.CollectionUtils;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -25,9 +24,8 @@ import org.apache.http.impl.client.HttpClients;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.ssl.SSLContexts;
 import org.apache.http.util.EntityUtils;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import org.springframework.util.CollectionUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * http常用处理工具类
@@ -36,68 +34,9 @@ import org.springframework.util.CollectionUtils;
  */
 public class HttpUtil {
 
-	private static final Logger logger=LogManager.getLogger(HttpUtil.class);
+	private static final Logger logger=LoggerFactory.getLogger(HttpUtil.class);
 
 	private final static String CHARSET_NAME = "UTF-8";
-
-	/**
-	 * 获取用户真实IP地址
-	 * @param request
-	 * @return
-	 */
-	public static String getIpAddress(HttpServletRequest request) {
-		String ip = request.getHeader("x-forwarded-for");
-		if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
-			ip = request.getHeader("Proxy-Client-IP");
-		}
-		if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
-			ip = request.getHeader("WL-Proxy-Client-IP");
-		}
-		if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
-			ip = request.getHeader("HTTP_CLIENT_IP");
-		}
-		if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
-			ip = request.getHeader("HTTP_X_FORWARDED_FOR");
-		}
-		if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
-			ip = request.getHeader("X-Real-IP");
-		}
-		if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
-			ip = request.getRemoteAddr();
-		}
-		return ip;
-	}
-
-
-	/**
-	 * request对象转字节
-	 * @param request
-	 * @return
-	 */
-	public static byte[] getRequestByteArray(HttpServletRequest request) {
-		byte[] dataOrigin=null;
-		InputStream is = null;
-		try {
-			int contentLength = request.getContentLength();
-			if (contentLength <= 0) {
-				return null;
-			}
-			dataOrigin= new byte[contentLength];
-			is = request.getInputStream();
-			is.read(dataOrigin);
-		} catch (Exception e) {
-			logger.error("request对象转字节失败！", e);
-		}finally {
-			try {
-				if (is!=null){
-					is.close();
-				}
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-		return dataOrigin;
-	}
 
 	public static String getRequest(String url) {
 		try {
@@ -166,7 +105,7 @@ public class HttpUtil {
 		httpPost.setEntity(postEntity);
 		httpPost.addHeader("Content-Type", "text/xml");
 		HttpClient client = HttpClients.createDefault();
-		if (!CollectionUtils.isEmpty(headers)){
+		if (headers!=null && !headers.isEmpty()){
 			headers.forEach((k,v)->{
 				httpPost.addHeader(k,v);
 			});
@@ -264,7 +203,7 @@ public class HttpUtil {
 		HttpPost post=new HttpPost(url);
 		post.setHeader("ContentType","application/x-www-form-urlencoded;charset=UTF-8");
 
-		if (!CollectionUtils.isEmpty(headers)){
+		if (headers!=null && !headers.isEmpty()){
 			headers.forEach((k,v)->{
 				post.addHeader(k,v);
 			});

@@ -1,6 +1,6 @@
 package com.yz.common.core.redis;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import redis.clients.jedis.Jedis;
 
 public class RedisLockUtil {

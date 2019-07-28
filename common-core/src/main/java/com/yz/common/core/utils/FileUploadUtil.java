@@ -4,12 +4,12 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
 import java.util.Arrays;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 public class FileUploadUtil {
-	private static final Logger logger=LogManager.getLogger(FileUploadUtil.class);
+	private static final Logger logger= LoggerFactory.getLogger(FileUploadUtil.class);
 
 	private static final String[] FILE_EXTS = { "JPG", "PNG", "GIF" };
 

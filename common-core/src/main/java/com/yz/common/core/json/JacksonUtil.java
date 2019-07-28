@@ -5,9 +5,9 @@ import java.util.Collection;
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.*;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import com.fasterxml.jackson.core.JsonParser.Feature;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * json工具类
@@ -15,7 +15,7 @@ import com.fasterxml.jackson.core.JsonParser.Feature;
  */
 public class JacksonUtil {
 
-	private static final Logger logger=LogManager.getLogger(JacksonUtil.class);
+	private static final Logger logger= LoggerFactory.getLogger(JacksonUtil.class);
 
 	private static ObjectMapper objectMapper = new ObjectMapper();
 

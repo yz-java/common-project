@@ -1,8 +1,7 @@
 package com.yz.common.core.utils;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -18,7 +17,7 @@ import java.util.regex.Pattern;
  */
 public class IDCardUtil {
 
-    private static final Logger logger = LogManager.getLogger(IDCardUtil.class);
+    private static final Logger logger = LoggerFactory.getLogger(IDCardUtil.class);
 
     private static Hashtable areaCodeHashtable = new Hashtable();
 

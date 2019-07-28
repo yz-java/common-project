@@ -6,6 +6,8 @@ import com.yz.common.core.utils.HttpUtil;
 import com.yz.common.core.utils.StringUtils;
 import com.yz.common.security.ISecurity;
 import com.yz.common.web.IHttpServletRequestWrapper;
+import com.yz.common.web.utils.WebUtil;
+
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -40,7 +42,7 @@ public class DataSafeFilter extends BaseFilter {
         IHttpServletRequestWrapper iHttpServletRequestWrapper = new IHttpServletRequestWrapper((HttpServletRequest) request,null);
         //解析请求数据
         try {
-            byte[] data = HttpUtil.getRequestByteArray(httpServletRequest);
+            byte[] data = WebUtil.getRequestByteArray(httpServletRequest);
             if (data == null || data.length <= 0) {
                 logger.info("请求数据为空,url=" + url);
                 chain.doFilter(iHttpServletRequestWrapper,response);

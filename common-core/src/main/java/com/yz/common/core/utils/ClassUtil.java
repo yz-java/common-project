@@ -8,7 +8,7 @@ import javassist.Modifier;
 import javassist.bytecode.CodeAttribute;
 import javassist.bytecode.LocalVariableAttribute;
 import javassist.bytecode.MethodInfo;
-import org.springframework.util.ClassUtils;
+import org.apache.commons.lang3.ClassUtils;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;

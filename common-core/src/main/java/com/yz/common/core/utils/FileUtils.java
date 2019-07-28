@@ -134,11 +134,11 @@ public class FileUtils extends org.apache.commons.io.FileUtils {
 	}
 
 	/**
-	 * 修改文件名称
+	 * 文件重命名
 	 * @param path
 	 * @param newFileName
 	 */
-	public static void updateName(String path,String newFileName){
+	public static void fileRename(String path,String newFileName){
 		File oldFile = new File(path);
 		String parent = oldFile.getParent();
 		File newFile = new File(parent+"/"+newFileName);

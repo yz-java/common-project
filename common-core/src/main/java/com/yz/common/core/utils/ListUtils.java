@@ -8,7 +8,7 @@ import java.util.Random;
  * @auther yangzhao
  * create by 17/10/10
  */
-public class ListUtils extends org.apache.commons.collections.ListUtils {
+public class ListUtils {
 
     /**
      * 从list中随机获取指定个数元素

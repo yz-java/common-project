@@ -1,7 +1,7 @@
 package com.yz.common.core.utils;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * 图片处理
@@ -10,7 +10,7 @@ import org.apache.logging.log4j.Logger;
  * 
  */
 public class GraphicsMagick {
-	private static final Logger logger=LogManager.getLogger(GraphicsMagick.class);
+	private static final Logger logger= LoggerFactory.getLogger(GraphicsMagick.class);
 
 	/**
 	 * 缩放图片

@@ -1,8 +1,7 @@
 package com.yz.common.core.service;
 
 import com.yz.common.core.dao.BaseDao;
-import org.springframework.util.CollectionUtils;
-
+import org.apache.commons.collections4.CollectionUtils;
 import java.util.List;
 
 /**
