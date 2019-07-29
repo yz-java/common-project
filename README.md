@@ -36,18 +36,22 @@ JSON类(JsonUtil)
 
 ②基于redis实现分布式锁(RedisLockUtil)
 
-## 5.微信、支付宝支付（common-pay）
+## 5.支付模块（common-pay）
 
-使用PayFactory工厂类统一管理
+①使用简单工厂模式实现预支付订单生成（位于com.yz.common.payment.trade.pay包下）
 
-①创建订单（createOrder）
-    
-②退款(refund）
-    
-③生成移动端调起微信和支付宝时所需要的参数（createPayParams）
-    
-④订单查询（queryOrder）
-    
+![image.png](https://upload-images.jianshu.io/upload_images/3057341-77da3dce07ca5e42.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+②使用建造者模式对预支付订单参数进行动态构建（位于com.yz.common.payment.trade.pay.builder包下）
+
+![image.png](https://upload-images.jianshu.io/upload_images/3057341-b31a5e2f5428a365.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+③通过ThirdPayFactory工厂类获取PayService
+
+![image.png](https://upload-images.jianshu.io/upload_images/3057341-240fecbbe6264c28.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+④发起预支付订单、退款、订单查询调用
+
 ## 6.common-web
 
 ①请求参数转换（非Form表单或get+参数方式）：
