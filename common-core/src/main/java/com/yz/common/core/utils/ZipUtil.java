@@ -128,8 +128,6 @@ public class ZipUtil {
      * @return
      */
     public static boolean unzip(String zipFileName, String dstPath) {
-        System.out.println("zip uncompressing...");
-
         try {
             ZipInputStream zipInputStream = new ZipInputStream(new FileInputStream(zipFileName));
             ZipEntry zipEntry = null;
