@@ -36,7 +36,6 @@ public class WordUtil {
         HWPFDocument wordDocument = new HWPFDocument(input);
         WordToHtmlConverter wordToHtmlConverter = new WordToHtmlConverter(DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument());
         wordToHtmlConverter.setPicturesManager(new PicturesManager() {
-            @Override
             public String savePicture(byte[] content, PictureType pictureType, String suggestedName, float widthInches, float heightInches) {
                 return suggestedName;
             }
