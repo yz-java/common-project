@@ -15,7 +15,7 @@ public class ImageUtil {
      * @param imgFile
      * @return
      */
-    public String imageToBase64(File imgFile) {// 将图片文件转化为字节数组字符串，并对其进行Base64编码处理
+    public static String imageToBase64(File imgFile) {// 将图片文件转化为字节数组字符串，并对其进行Base64编码处理
         String contentToBase64 = FileUtils.fileContentToBase64(imgFile);
         String name = imgFile.getName();
         String suffix = name.substring(name.lastIndexOf(".") + 1);
@@ -28,7 +28,7 @@ public class ImageUtil {
      * @param imgFilePath 图片本地路径
      * @return
      */
-    public String imageToBase64(String imgFilePath) {// 将图片文件转化为字节数组字符串，并对其进行Base64编码处理
+    public static String imageToBase64(String imgFilePath) {// 将图片文件转化为字节数组字符串，并对其进行Base64编码处理
         File file = new File(imgFilePath);
         return imageToBase64(file);
     }
