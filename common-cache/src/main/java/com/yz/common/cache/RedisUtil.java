@@ -1,10 +1,9 @@
-package com.yz.common.core.redis;
+package com.yz.common.cache;
 
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import com.alibaba.fastjson.JSON;
-import com.yz.common.core.utils.PropertyUtil;
 import org.apache.commons.pool2.impl.GenericObjectPoolConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -68,23 +67,6 @@ public class RedisUtil {
         logger.info("----开启redis缓存(数据库为：" + dataBase + ")");
     }
 
-
-    public RedisUtil(String propertiesUri) {
-        GenericObjectPoolConfig genericObjectPoolConfig = new GenericObjectPoolConfig();
-        genericObjectPoolConfig.setMaxTotal(MAX_ACTIVE);
-        genericObjectPoolConfig.setMaxIdle(MAX_IDLE);
-        genericObjectPoolConfig.setMaxWaitMillis(MAX_WAIT);
-        genericObjectPoolConfig.setTestOnBorrow(TEST_ON_BORROW);
-        PropertyUtil property = new PropertyUtil(propertiesUri);
-        String host = property.getProperty("redis.host");
-        String password = property.getProperty("redis.password");
-        int port = Integer.parseInt(property.getProperty("redis.port"));
-        //初始化Redis连接池
-        this.pool = new JedisPool(genericObjectPoolConfig, host, port, TIMEOUT, password);
-        int dataBase = Integer.parseInt(property.getProperty("redis.database"));
-        this.dataBase = dataBase;
-        logger.info("----开启redis缓存(数据库为：" + dataBase + ")");
-    }
 
     /**
      * 获取Jedis实例

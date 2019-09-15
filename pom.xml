@@ -4,7 +4,7 @@
 
     <groupId>com.yz</groupId>
     <artifactId>common-project</artifactId>
-    <version>1.0.1</version>
+    <version>1.0.2</version>
     <modules>
         <module>common-core</module>
         <module>common-cache</module>
@@ -13,6 +13,7 @@
         <module>common-pay</module>
         <module>common-web</module>
         <module>common-elasticsearch</module>
+        <module>common-distributed-lock</module>
     </modules>
     <packaging>pom</packaging>
 
@@ -230,6 +231,12 @@
             <dependency>
                 <groupId>org.apache.httpcomponents</groupId>
                 <artifactId>httpclient</artifactId>
+                <version>${httpclient.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.httpcomponents</groupId>
+                <artifactId>httpmime</artifactId>
                 <version>${httpclient.version}</version>
             </dependency>
 

@@ -1,15 +1,13 @@
 package com.yz.common.cache.redis;
 
 import com.alibaba.fastjson.JSON;
-import com.yz.common.core.redis.RedisUtil;
+import com.yz.common.cache.RedisUtil;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.util.CollectionUtils;
 
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 

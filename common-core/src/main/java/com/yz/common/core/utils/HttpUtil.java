@@ -3,6 +3,7 @@ package com.yz.common.core.utils;
 import java.io.*;
 import java.net.SocketTimeoutException;
 import java.net.URI;
+import java.nio.charset.Charset;
 import java.security.KeyStore;
 import java.util.*;
 import javax.net.ssl.SSLContext;
@@ -11,7 +12,9 @@ import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.HttpClient;
+import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.utils.URLEncodedUtils;
@@ -19,7 +22,9 @@ import org.apache.http.conn.ConnectTimeoutException;
 import org.apache.http.conn.ConnectionPoolTimeoutException;
 import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
 import org.apache.http.entity.StringEntity;
+import org.apache.http.entity.mime.MultipartEntityBuilder;
 import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.ssl.SSLContexts;
@@ -306,6 +311,30 @@ public class HttpUtil {
 		String params=builder.toString();
 		params=params.substring(0, params.length()-1);
 		return params;
+	}
+
+	public static String sendPostFile(String url,File file,Map<String,String> data){
+		CloseableHttpClient httpClient = HttpClientBuilder.create().build();
+		RequestConfig requestConfig = RequestConfig.custom().setConnectTimeout(200000).setSocketTimeout(200000000).build();
+		HttpPost httpPost = new HttpPost(url);
+		httpPost.setConfig(requestConfig);
+		MultipartEntityBuilder multipartEntityBuilder = MultipartEntityBuilder.create();
+		multipartEntityBuilder.setCharset(Charset.forName("UTF-8"));
+		multipartEntityBuilder.addBinaryBody("file",file);
+		if (data!=null){
+			data.forEach((k,v)->{
+				multipartEntityBuilder.addTextBody(k, v);
+			});
+		}
+		HttpEntity httpEntity = multipartEntityBuilder.build();
+		httpPost.setEntity(httpEntity);
+		try {
+			CloseableHttpResponse response = httpClient.execute(httpPost);
+			return EntityUtils.toString(response.getEntity());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 }

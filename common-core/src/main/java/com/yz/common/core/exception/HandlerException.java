@@ -3,7 +3,7 @@ package com.yz.common.core.exception;
 /**
  * Created by yangzhao on 17/3/29.
  */
-public class HandlerException extends Exception {
+public class HandlerException extends RuntimeException {
 
     private int code;
 
