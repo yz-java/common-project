@@ -1,7 +1,6 @@
 package com.yz.common.distributed.lock.interceptor;
 
-import com.yz.common.core.annotations.MethodLock;
-import com.yz.common.core.exception.HandlerException;
+import com.yz.common.distributed.lock.annotation.MethodLock;
 import com.yz.common.distributed.lock.DistributedLock;
 import com.yz.common.distributed.lock.MethodLockConfigBeanNameUtils;
 import org.aopalliance.intercept.MethodInterceptor;
@@ -60,21 +59,14 @@ public class MethodLockInterceptor implements MethodInterceptor {
             lock = distributedLock.lock(lockKey,time, timeUnit,attemptNum);
             if (!lock){
                 logger.info("方法名====>"+methodName+" 未获取到锁");
-                throw new HandlerException(-1,"获取方法锁失败");
+                throw new RuntimeException("获取方法锁失败");
             }
             return methodInvocation.proceed();
-        }catch (Throwable throwable) {
-            throwable.printStackTrace();
-            if (throwable instanceof HandlerException){
-                HandlerException handlerException= (HandlerException) throwable;
-                throw handlerException;
-            }
         }finally {
             if (annotation!=null&&annotation.autoUnLock()&&lock){
                 distributedLock.unlock(lockKey);
             }
         }
-        return null;
     }
 
     public String[] getParamterNames(Method method){

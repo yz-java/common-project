@@ -1,4 +1,4 @@
-package com.yz.common.core.annotations;
+package com.yz.common.distributed.lock.annotation;
 
 import java.lang.annotation.*;
 import java.util.concurrent.TimeUnit;

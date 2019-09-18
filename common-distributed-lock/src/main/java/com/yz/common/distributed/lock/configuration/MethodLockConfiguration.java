@@ -1,6 +1,6 @@
 package com.yz.common.distributed.lock.configuration;
 
-import com.yz.common.core.annotations.MethodLock;
+import com.yz.common.distributed.lock.annotation.MethodLock;
 import com.yz.common.distributed.lock.DistributedLock;
 import com.yz.common.distributed.lock.MethodLockConfigBeanNameUtils;
 import com.yz.common.distributed.lock.interceptor.MethodLockInterceptor;

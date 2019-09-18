@@ -1,13 +1,12 @@
 package com.yz.common.distributed.lock;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.data.redis.connection.RedisConnection;
 import org.springframework.data.redis.core.RedisCallback;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.RedisSerializer;
-import org.springframework.stereotype.Component;
 
+import javax.annotation.Resource;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -16,15 +15,21 @@ import java.util.concurrent.TimeUnit;
  * @Date: 2019/4/29 18:22
  * @Description:
  */
-@Component
 public class DistributedLock {
 
-    @Autowired
+    @Resource(name = "redisTemplate")
     private RedisTemplate redisTemplate;
+
+    public DistributedLock() {
+    }
+
+    public DistributedLock(RedisTemplate redisTemplate) {
+        this.redisTemplate=redisTemplate;
+    }
 
     /**
      *
-     * @param key
+     * @param key 锁标识
      * @param attempt 重试次数
      * @return
      */
@@ -45,6 +50,14 @@ public class DistributedLock {
         return false;
     }
 
+    /**
+     *
+     * @param key 锁标识
+     * @param time 过期时间
+     * @param timeUnit 过期时间单位
+     * @param attemptNum 重试次数
+     * @return
+     */
     public boolean lock(String key, long time, TimeUnit timeUnit,int attemptNum){
         boolean lock = this.lock(key, time, timeUnit);
         attemptNum--;

@@ -4,11 +4,80 @@ Java后端常用工具类、缓存接口、消息队列接口、第三方支付�
 
 [TOC]
 
-## 1.缓存(common-cache)：
+## 1.分布式锁、分布式方法锁(common-distributed-lock)：
 
-① 基于JVM方法区数据缓存
+### DistributedLock类（依赖RedisTemplate接口实现）
+```
 
-② 基于redis进行数据缓存
+    /**
+     *
+     * @param key 锁标识
+     * @param attempt 重试次数
+     * @return
+     */
+    public boolean lock(String key,int attempt);
+
+    /**
+     * 
+     * @param key 锁标识
+     * @param time 过期时间
+     * @param timeUnit 过期时间单位
+     * @param attemptNum 重试次数
+     * @return
+     */
+    public boolean lock(String key, long time, TimeUnit timeUnit,int attemptNum)
+```
+
+### @EnableMethodLock @MethodLock 使用
+#### @EnableMethodLock
+
+**在Spring Boot 项目启动类添加该注解开启分布式方法锁**
+
+**普通Spring项目配置component-scan自动扫描com.yz.common.distributed.lock.configuration包即可**
+
+#### @MethodLock
+
+```
+@Target({ElementType.METHOD})
+@Retention(RetentionPolicy.RUNTIME)
+@Documented
+public @interface MethodLock {
+    /**
+     * 锁标识
+     * @return
+     */
+    String key()  default "";
+
+    /**
+     * 时间
+     * @return
+     */
+    long time() default 10;
+
+    /**
+     * 单位
+     * @return
+     */
+    TimeUnit timeUnit() default TimeUnit.SECONDS;
+
+    /**
+     * 是否自动解锁
+     * @return
+     */
+    boolean autoUnLock() default true;
+
+    /**
+     * 重试次数
+     * @return
+     */
+    int attemptNum() default 0;
+
+}
+```
+
+在需要使用分布式方法锁的method上使用该注解即可
+
+
 
 ## 2.ES（common-elasticsearch）
 

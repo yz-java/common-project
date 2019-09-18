@@ -15,11 +15,6 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.yz</groupId>
-            <artifactId>common-core</artifactId>
-            <version>1.0.2</version>
-        </dependency>
-        <dependency>
             <groupId>redis.clients</groupId>
             <artifactId>jedis</artifactId>
         </dependency>
