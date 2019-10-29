@@ -23,46 +23,25 @@
     <!-- nexus 仓库 -->
     <repositories>
         <repository>
-            <id>snapshots</id>
-            <name>snapshots</name>
-            <url>http://nexus.huamaiwebchat.com/nexus/content/repositories/snapshots</url>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
+            <id>yz-snapshot</id>
+            <url>http://nexus.newglish.com/repository/yz-snapshot/</url>
         </repository>
         <repository>
-            <id>public</id>
-            <name>Public Repositories</name>
-            <url>http://nexus.huamaiwebchat.com/nexus/content/groups/public/</url>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-        </repository>
-        <repository>
-            <id>thirdparty</id>
-            <name>3rd party</name>
-            <url>http://nexus.huamaiwebchat.com/nexus/content/repositories/thirdparty</url>
-        </repository>
-        <repository>
-            <id>releases</id>
-            <name>Releases</name>
-            <url>http://nexus.huamaiwebchat.com/nexus/content/repositories/releases</url>
+            <id>yz-release</id>
+            <url>http://nexus.newglish.com/repository/yz-release/</url>
         </repository>
     </repositories>
 
     <!-- 发布jar包到nexus -->
     <distributionManagement>
         <snapshotRepository>
-            <id>snapshots</id>
-            <url>http://nexus.huamaiwebchat.com/nexus/content/repositories/snapshots</url>
+            <id>yz-snapshot</id>
+            <url>http://nexus.newglish.com/repository/yz-snapshot/</url>
         </snapshotRepository>
 
         <repository>
-            <id>releases</id>
-            <url>http://nexus.huamaiwebchat.com/nexus/content/repositories/releases</url>
+            <id>yz-release</id>
+            <url>http://nexus.newglish.com/repository/yz-release/</url>
         </repository>
 
     </distributionManagement>
