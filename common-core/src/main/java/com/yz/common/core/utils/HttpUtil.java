@@ -146,11 +146,11 @@ public class HttpUtil {
         HttpPost httpPost = new HttpPost(url);
         StringEntity postEntity = new StringEntity(cnt, CHARSET_NAME);
         httpPost.setEntity(postEntity);
-        httpPost.addHeader("Content-Type", "text/xml");
+        httpPost.setHeader("Content-Type", "text/xml");
         HttpClient client = HttpClients.createDefault();
         if (headers != null && !headers.isEmpty()) {
             headers.forEach((k, v) -> {
-                httpPost.addHeader(k, v);
+                httpPost.setHeader(k, v);
             });
         }
         try {
@@ -165,6 +165,31 @@ public class HttpUtil {
             logger.error("message get throw SocketTimeoutException");
         } catch (Exception e) {
             logger.error("message get throw Exception");
+        } finally {
+            httpPost.abort();
+        }
+        return result;
+    }
+
+    public static String sendJSONPost(String url, String jsonData, Map<String, String> headers) {
+        String result = null;
+        HttpPost httpPost = new HttpPost(url);
+        StringEntity postEntity = new StringEntity(jsonData, CHARSET_NAME);
+        postEntity.setContentType("application/json");
+        httpPost.setEntity(postEntity);
+        httpPost.setHeader("Content-Type", "application/json");
+        HttpClient client = HttpClients.createDefault();
+        if (headers != null && !headers.isEmpty()) {
+            headers.forEach((k, v) -> {
+                httpPost.setHeader(k, v);
+            });
+        }
+        try {
+            HttpResponse response = client.execute(httpPost);
+            HttpEntity entity = response.getEntity();
+            result = EntityUtils.toString(entity, "UTF-8");
+        } catch (Exception e) {
+            logger.error("http request error ", e);
         } finally {
             httpPost.abort();
         }
