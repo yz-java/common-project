@@ -131,8 +131,3 @@ JSON类(JsonUtil)
 
 
 ②基于hibernate-validator restful接口参数验证
-
-QQ:208275451
-邮箱：yangzhao_java@163.com
-
-
