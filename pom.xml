@@ -23,12 +23,8 @@
     <!-- nexus 仓库 -->
     <repositories>
         <repository>
-            <id>yz-snapshot</id>
-            <url>http://nexus.newglish.com/repository/yz-snapshot/</url>
-        </repository>
-        <repository>
-            <id>yz-release</id>
-            <url>http://nexus.newglish.com/repository/yz-release/</url>
+            <id>maven-public</id>
+            <url>http://114.67.102.121:8081/repository/maven-public/</url>
         </repository>
     </repositories>
 
@@ -36,12 +32,12 @@
     <distributionManagement>
         <snapshotRepository>
             <id>yz-snapshot</id>
-            <url>http://nexus.newglish.com/repository/yz-snapshot/</url>
+            <url>http://114.67.102.121:8081/repository/yz-snapshots/</url>
         </snapshotRepository>
 
         <repository>
             <id>yz-release</id>
-            <url>http://nexus.newglish.com/repository/yz-release/</url>
+            <url>http://114.67.102.121:8081/repository/yz-releases/</url>
         </repository>
 
     </distributionManagement>
@@ -66,6 +62,8 @@
         <solrj.version>5.5.4</solrj.version>
         <poi.version>3.17</poi.version>
         <org.elasticsearch.version>6.2.4</org.elasticsearch.version>
+        <org.hibernate.validator.version>6.1.2.Final</org.hibernate.validator.version>
+        <javax.validation.api.version>1.1.0.Final</javax.validation.api.version>
     </properties>
 
 
@@ -211,7 +209,13 @@
             <dependency>
                 <groupId>org.hibernate.validator</groupId>
                 <artifactId>hibernate-validator</artifactId>
-                <version>RELEASE</version>
+                <version>${org.hibernate.validator.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>javax.validation</groupId>
+                <artifactId>validation-api</artifactId>
+                <version>${javax.validation.api.version}</version>
             </dependency>
 
             <dependency>

@@ -1,5 +1,22 @@
 package com.yz.common.web.http.params.validate;
 
+import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.lang.reflect.Parameter;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
+
+import javax.validation.ConstraintViolation;
+
+import org.aopalliance.intercept.MethodInterceptor;
+import org.aopalliance.intercept.MethodInvocation;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
+
 import com.alibaba.fastjson.JSON;
 import com.yz.common.core.configuration.ValidatorConfiguration;
 import com.yz.common.core.exception.HandlerException;
@@ -7,25 +24,11 @@ import com.yz.common.core.message.ResponseMessage;
 import com.yz.common.core.utils.ClassUtil;
 import com.yz.common.web.annotations.HttpParam;
 import com.yz.common.web.annotations.ParamsValidate;
-import org.aopalliance.intercept.MethodInterceptor;
-import org.aopalliance.intercept.MethodInvocation;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Component;
-
-import javax.validation.ConstraintViolation;
-import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-import java.lang.reflect.Parameter;
-import java.util.*;
-import java.util.stream.Collectors;
 
 /**
- * 增强类
- * 实现MethodInterceptor接口，通过反射动态解析方法是否标注@DataSource {@link ParamsValidate}注解。
- * @author yangzhao
- *         create by 17/10/20
+ * 增强类 实现MethodInterceptor接口，通过反射动态解析方法是否标注@DataSource {@link ParamsValidate}注解。
+ * 
+ * @author yangzhao create by 17/10/20
  */
 @Component("httpParamsValidateAdvisor")
 public class HttpParamsValidateAdvisor implements MethodInterceptor {
@@ -37,13 +40,14 @@ public class HttpParamsValidateAdvisor implements MethodInterceptor {
         Method method = methodInvocation.getMethod();
         Object[] arguments = methodInvocation.getArguments();
         Parameter[] parameters = method.getParameters();
-        for (int i=0;i<parameters.length; i++) {
+        for (int i = 0; i < parameters.length; i++) {
             ParamsValidate annotation = parameters[i].getAnnotation(ParamsValidate.class);
-            if (annotation!=null){
-                Set<ConstraintViolation<Object>> violationSet = ValidatorConfiguration.validator().validate(arguments[i]);
+            if (annotation != null) {
+                Set<ConstraintViolation<Object>> violationSet =
+                    ValidatorConfiguration.validator().validate(arguments[i]);
                 for (ConstraintViolation model : violationSet) {
-                    logger.warn(model.getPropertyPath()+model.getMessage());
-                    return JSON.toJSONString(new ResponseMessage(-1,model.getPropertyPath()+model.getMessage()));
+                    logger.warn(model.getPropertyPath() + model.getMessage());
+                    return JSON.toJSONString(new ResponseMessage(-1, model.getPropertyPath() + model.getMessage()));
                 }
             }
         }
@@ -51,7 +55,7 @@ public class HttpParamsValidateAdvisor implements MethodInterceptor {
         Object proceed = null;
         try {
             proceed = methodInvocation.proceed();
-        }catch (Exception e){
+        } catch (Exception e) {
             throw e;
         }
         return proceed;
@@ -61,10 +65,9 @@ public class HttpParamsValidateAdvisor implements MethodInterceptor {
         Class<?> aClass = argument.getClass();
         Field[] declaredFields = aClass.getDeclaredFields();
         List<String> nullParams = new ArrayList<>();
-        for (Field field :declaredFields)
-        {
+        for (Field field : declaredFields) {
             HttpParam annotation = field.getAnnotation(HttpParam.class);
-            if (annotation==null){
+            if (annotation == null) {
                 continue;
             }
 
@@ -73,7 +76,7 @@ public class HttpParamsValidateAdvisor implements MethodInterceptor {
             try {
                 declaredMethod = aClass.getDeclaredMethod(methodName);
                 Object invoke = declaredMethod.invoke(argument);
-                if (invoke==null){
+                if (invoke == null) {
                     nullParams.add(field.getName());
                 }
             } catch (NoSuchMethodException e) {
@@ -86,9 +89,9 @@ public class HttpParamsValidateAdvisor implements MethodInterceptor {
 
         }
 
-        if (nullParams.size()>0){
+        if (nullParams.size() > 0) {
             String collect = nullParams.stream().collect(Collectors.joining("、"));
-            throw new HandlerException("请求参数"+collect+"不能为空");
+            throw new HandlerException("请求参数" + collect + "不能为空");
         }
 
     }

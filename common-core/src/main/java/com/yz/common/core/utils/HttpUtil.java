@@ -157,14 +157,8 @@ public class HttpUtil {
             HttpResponse response = client.execute(httpPost);
             HttpEntity entity = response.getEntity();
             result = EntityUtils.toString(entity, "UTF-8");
-        } catch (ConnectionPoolTimeoutException e) {
-            logger.error("message get throw ConnectionPoolTimeoutException(wait time out)");
-        } catch (ConnectTimeoutException e) {
-            logger.error("message get throw ConnectTimeoutException");
-        } catch (SocketTimeoutException e) {
-            logger.error("message get throw SocketTimeoutException");
         } catch (Exception e) {
-            logger.error("message get throw Exception");
+            logger.error("http request fail", e);
         } finally {
             httpPost.abort();
         }
