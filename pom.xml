@@ -62,8 +62,9 @@
         <solrj.version>5.5.4</solrj.version>
         <poi.version>3.17</poi.version>
         <org.elasticsearch.version>6.2.4</org.elasticsearch.version>
-        <org.hibernate.validator.version>6.1.2.Final</org.hibernate.validator.version>
+        <org.hibernate.validator.version>6.1.5.Final</org.hibernate.validator.version>
         <javax.validation.api.version>1.1.0.Final</javax.validation.api.version>
+        <com.fasterxml.jackson.version>2.11.1</com.fasterxml.jackson.version>
     </properties>
 
 
@@ -268,12 +269,17 @@
             <dependency>
                 <groupId>com.fasterxml.jackson.core</groupId>
                 <artifactId>jackson-core</artifactId>
-                <version>2.9.9</version>
+                <version>${com.fasterxml.jackson.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.fasterxml.jackson.core</groupId>
                 <artifactId>jackson-databind</artifactId>
-                <version>2.9.10.1</version>
+                <version>${com.fasterxml.jackson.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-annotations</artifactId>
+                <version>${com.fasterxml.jackson.version}</version>
             </dependency>
 
             <dependency>
