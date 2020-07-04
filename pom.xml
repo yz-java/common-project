@@ -55,7 +55,7 @@
         <log4j.version>2.5</log4j.version>
         <commons.fileupload.version>1.4</commons.fileupload.version>
         <commons.lang.version>2.6</commons.lang.version>
-        <commons.beanutils.version>1.9.3</commons.beanutils.version>
+        <commons.beanutils.version>1.9.4</commons.beanutils.version>
         <activemq.version>5.14.4</activemq.version>
         <org.javassist.version>3.22.0-GA</org.javassist.version>
         <org.reflections.version>0.9.11</org.reflections.version>
