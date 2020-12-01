@@ -1,6 +1,7 @@
 package com.yz.common.payment.trade.pay.bo;
 
 import com.alipay.api.response.AlipayTradeAppPayResponse;
+import com.alipay.api.response.AlipayTradeWapPayResponse;
 
 /**
  * @author: yangzhao
@@ -70,7 +71,7 @@ public class AliTradePayResponse extends TradePayResponse {
         this.tradeNo = tradeNo;
     }
 
-    public static AliTradePayResponse  generator(AlipayTradeAppPayResponse alipayTradeAppPayResponse){
+    public static AliTradePayResponse generator(AlipayTradeAppPayResponse alipayTradeAppPayResponse) {
         AliTradePayResponse aliTradePayResponse = new AliTradePayResponse();
         aliTradePayResponse.setOutTradeNo(alipayTradeAppPayResponse.getOutTradeNo());
         aliTradePayResponse.setTotalAmount(alipayTradeAppPayResponse.getTotalAmount());
@@ -79,4 +80,15 @@ public class AliTradePayResponse extends TradePayResponse {
         aliTradePayResponse.setSellerId(alipayTradeAppPayResponse.getSellerId());
         return null;
     }
+
+    public static AliTradePayResponse generator(AlipayTradeWapPayResponse alipayTradeAppPayResponse) {
+        AliTradePayResponse aliTradePayResponse = new AliTradePayResponse();
+        aliTradePayResponse.setOutTradeNo(alipayTradeAppPayResponse.getOutTradeNo());
+        aliTradePayResponse.setTotalAmount(alipayTradeAppPayResponse.getTotalAmount());
+        aliTradePayResponse.setTradeNo(alipayTradeAppPayResponse.getOutTradeNo());
+        aliTradePayResponse.setSellerId(alipayTradeAppPayResponse.getSellerId());
+        aliTradePayResponse.setBody(alipayTradeAppPayResponse.getBody());
+        return aliTradePayResponse;
+    }
+
 }

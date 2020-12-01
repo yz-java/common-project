@@ -6,4 +6,14 @@ package com.yz.common.payment.trade.pay.bo;
  * @Description:
  */
 public abstract class TradePayResponse {
+
+    private String body;
+
+    public String getBody() {
+        return body;
+    }
+
+    public void setBody(String body) {
+        this.body = body;
+    }
 }
