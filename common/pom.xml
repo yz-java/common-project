@@ -45,6 +45,11 @@
         </dependency>
         <dependency>
             <groupId>com.yz</groupId>
+            <artifactId>common-pay</artifactId>
+            <version>1.0.2</version>
+        </dependency>
+        <dependency>
+            <groupId>com.yz</groupId>
             <artifactId>common-distributed-lock</artifactId>
             <version>1.0.2</version>
         </dependency>
