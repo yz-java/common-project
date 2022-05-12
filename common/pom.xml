@@ -3,7 +3,7 @@
     <parent>
         <artifactId>common-project</artifactId>
         <groupId>com.yz</groupId>
-        <version>1.0.2</version>
+        <version>1.0.3</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
@@ -21,37 +21,37 @@
         <dependency>
             <groupId>com.yz</groupId>
             <artifactId>common-core</artifactId>
-            <version>1.0.2</version>
+            <version>1.0.3</version>
         </dependency>
         <dependency>
             <groupId>com.yz</groupId>
             <artifactId>common-cache</artifactId>
-            <version>1.0.2</version>
+            <version>1.0.3</version>
         </dependency>
         <dependency>
             <groupId>com.yz</groupId>
             <artifactId>common-security</artifactId>
-            <version>1.0.2</version>
+            <version>1.0.3</version>
         </dependency>
         <dependency>
             <groupId>com.yz</groupId>
             <artifactId>common-web</artifactId>
-            <version>1.0.2</version>
+            <version>1.0.3</version>
         </dependency>
         <dependency>
             <groupId>com.yz</groupId>
             <artifactId>common-elasticsearch</artifactId>
-            <version>1.0.2</version>
+            <version>1.0.3</version>
         </dependency>
         <dependency>
             <groupId>com.yz</groupId>
             <artifactId>common-pay</artifactId>
-            <version>1.0.2</version>
+            <version>1.0.3</version>
         </dependency>
         <dependency>
             <groupId>com.yz</groupId>
             <artifactId>common-distributed-lock</artifactId>
-            <version>1.0.2</version>
+            <version>1.0.3</version>
         </dependency>
     </dependencies>
 

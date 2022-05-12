@@ -4,7 +4,7 @@
 
     <groupId>com.yz</groupId>
     <artifactId>common-project</artifactId>
-    <version>1.0.2</version>
+    <version>1.0.3</version>
     <modules>
         <module>common-core</module>
         <module>common-cache</module>
@@ -24,7 +24,7 @@
     <repositories>
         <repository>
             <id>maven-public</id>
-            <url>http://114.67.102.121:8081/repository/maven-public/</url>
+            <url>http://60.205.185.248:7181/repository/maven-public/</url>
         </repository>
     </repositories>
 
@@ -32,12 +32,12 @@
     <distributionManagement>
         <snapshotRepository>
             <id>yz-snapshot</id>
-            <url>http://114.67.102.121:8081/repository/yz-snapshots/</url>
+            <url>http://60.205.185.248:7181/repository/yz-snapshots/</url>
         </snapshotRepository>
 
         <repository>
             <id>yz-releases</id>
-            <url>http://114.67.102.121:8081/repository/yz-releases/</url>
+            <url>http://60.205.185.248:7181/repository/yz-releases/</url>
         </repository>
 
     </distributionManagement>
