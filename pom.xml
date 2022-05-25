@@ -45,7 +45,7 @@
     <properties>
         <java.test>${java.home}</java.test>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <org.springframework.version>4.3.24.RELEASE</org.springframework.version>
+        <org.springframework.version>5.2.22.RELEASE</org.springframework.version>
         <java.version>1.8</java.version>
         <mybatis.version>3.3.0</mybatis.version>
         <mybatis.spring.version>1.3.1</mybatis.spring.version>
